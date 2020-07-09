@@ -17,6 +17,8 @@ class Controller {
         }
 
     }
+
+
     static async userLogin(req, res, next) {
 
         console.log(req.body);
@@ -57,7 +59,12 @@ class Controller {
 
         res.status(200).json(req.body)
     }
+
     static cat(req, res, next) {
+        // console.log('ok');
+        // res.status(200).json({
+        //     message: 'authenticated'
+        // });
 
     }
     static dog(req, res, next) {
