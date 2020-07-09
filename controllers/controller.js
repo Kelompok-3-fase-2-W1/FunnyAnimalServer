@@ -60,19 +60,54 @@ class Controller {
         res.status(200).json(req.body)
     }
 
-    static cat(req, res, next) {
-        // console.log('ok');
-        // res.status(200).json({
-        //     message: 'authenticated'
-        // });
+    static async cat(req, res, next) {
+
+        try {
+            let cat = await axios({
+                method: `GET`,
+                url: `https://api.thecatapi.com/v1/images/search?api_key=c9fb96c2-58df-4c88-8558-a369c7911aaa`,
+            })
+
+            // console.log(cat.data)
+
+            res.status(200).json(cat.data)
+        } catch (err) {
+            res.status(500).json(err.message)
+        }
 
     }
-    static dog(req, res, next) {
+    static async dog(req, res, next) {
 
-    }
-    static fox(req, res, next) {
+        // console.log('tes')
 
+        try {
+            let dog = await axios({
+                method: `GET`,
+                url: `https://random.dog/woof.json`
+            })
+
+            // console.log(dog.data)
+
+            res.status(200).json(dog.data)
+        } catch (err) {
+            res.status(500).json(err.message)
+        }
     }
+
+    static async fox(req, res, next) {
+        try {
+            let fox = await axios({
+                method: `GET`,
+                url: `https://randomfox.ca/floof/`
+            })
+
+            // console.log(fox)
+        }}
 }
 
 module.exports = Controller
+
+
+
+
+
