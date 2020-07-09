@@ -1,6 +1,7 @@
 const { User } = require('../models/index.js');
 const { comparePassword } = require('../helpers/hashPassword');
 const { jwtSign } = require('../helpers/jwt.js')
+const axios = require('axios')
 
 class Controller {
     static async userRegister(req, res, next) {
@@ -102,7 +103,12 @@ class Controller {
             })
 
             // console.log(fox)
-        }}
+
+            res.status(200).json(fox.data)
+        } catch (err) {
+            res.status(500).json(err.message)
+        }
+    }
 }
 
 module.exports = Controller
