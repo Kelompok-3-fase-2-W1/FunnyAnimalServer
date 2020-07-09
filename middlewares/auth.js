@@ -7,8 +7,9 @@ async function authentication(req, res, next) {
   let token = req.headers.token;
 
   if (!token) {
-    res.status(500).json({
-      message: 'Silahkan login terlebih dahulu'
+    next({
+      name: `Internal Server Error`,
+      errors: err.message
     })
   }
   else {
@@ -23,8 +24,9 @@ async function authentication(req, res, next) {
     })
 
     if (!dataUser) {
-      res.status(500).json({
-        message: 'silahkan login terlebih dahulu'
+      next({
+        name: `Internal Server Error`,
+        errors: err.message
       })
     }
     else {

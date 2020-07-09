@@ -24,7 +24,6 @@ module.exports = (sequelize, DataTypes) => {
       allowFalse: false,
       validate: {
         notEmpty: {
-          args: true,
           message: "Please fill the email field"
         },
         isEmail: {
@@ -36,7 +35,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
-          args: true,
           message: "Please fill the password field"
         }
       }
