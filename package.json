@@ -1,0 +1,28 @@
+{
+  "name": "FunnyAnimalServer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kelompok-3-fase-2-W1/FunnyAnimalServer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kelompok-3-fase-2-W1/FunnyAnimalServer/issues"
+  },
+  "homepage": "https://github.com/Kelompok-3-fase-2-W1/FunnyAnimalServer#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^2.0.4",
+    "pg": "^8.2.2",
+    "sequelize": "^6.3.0",
+    "sequelize-cli": "^6.2.0"
+  }
+}
