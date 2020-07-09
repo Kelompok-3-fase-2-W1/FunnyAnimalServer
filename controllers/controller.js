@@ -102,7 +102,10 @@ class Controller {
             })
 
             // console.log(fox)
-        }}
+        } catch (error) {
+
+        }
+    }
 }
 
 module.exports = Controller
