@@ -1,19 +1,19 @@
 const { User } = require('../models/index.js')
 
 class Controller {
-    static userRegister(req, res){
+    static userRegister(req, res, next){
 
     }
-    static userLogin(req,res){
+    static userLogin(req, res, next){
 
     }
-    static cat(req, res){
+    static cat(req, res, next){
 
     }
-    static dog(req, res){
+    static dog(req, res, next){
 
     }
-    static fox(req, res){
+    static fox(req, res, next){
         
     }
 }
