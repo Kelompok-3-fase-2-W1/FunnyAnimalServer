@@ -37,6 +37,9 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   }, {
+    hooks: {
+      //beforeCreate utk hash password
+    },
     sequelize,
     modelName: 'User',
   });
