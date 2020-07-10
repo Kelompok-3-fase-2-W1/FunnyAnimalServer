@@ -2,6 +2,7 @@ const { User } = require('../models/index.js');
 const { comparePassword } = require('../helpers/hashPassword');
 const { jwtSign } = require('../helpers/jwt.js')
 const axios = require('axios')
+const { verify } = require('../helpers/googleOauth.js')
 
 class Controller {
     static async userRegister(req, res, next) {
@@ -36,9 +37,7 @@ class Controller {
                 })
             }
 
-
         }
-
     }
 
 
@@ -87,8 +86,52 @@ class Controller {
             })
         }
 
+    }
 
+    static async googleLogin(req, res) {
+        const google_token = req.headers.google_token
 
+        try {
+            const payload = await verify(google_token)
+            const email = payload.email
+
+            const user = await User.findOne({
+                where: {
+                    email: email
+                }
+            })
+            if (user) {
+
+                if (!comparePassword(process.env.GOOGLE_DEFAULT_BROWSER, user.password)) {
+                    throw 'please login via website'
+                } else {
+                    const payload = {
+                        email: user.email
+                    }
+                    const token = jwtSign(payload)
+
+                    res.status(200).json({
+                        token
+                    })
+                }
+
+            } else {
+                let user = User.create({
+                    email: email,
+                    password: process.env.GOOGLE_DEFAULT_BROWSER
+                })
+
+                const payload = {
+                    email: user.email
+                }
+                const token = jwtSign(payload)
+                res.status(200).json({
+                    token: token
+                })
+            }
+        } catch (error) {
+            next(error)
+        }
     }
 
     static async cat(req, res, next) {
@@ -110,6 +153,8 @@ class Controller {
         }
 
     }
+
+
     static async dog(req, res, next) {
 
         // console.log('tes')
