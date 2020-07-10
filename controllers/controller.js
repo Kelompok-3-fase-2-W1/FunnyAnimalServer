@@ -1,3 +1,4 @@
+'use strict'
 const { User } = require('../models/index.js');
 const { comparePassword } = require('../helpers/hashPassword');
 const { jwtSign } = require('../helpers/jwt.js')
@@ -16,15 +17,19 @@ class Controller {
 
         } catch (err) {
 
-            console.log(err);
+            // console.log(err);
 
-            if (err.name === `SequelizeValidationError`) {
+            if (err.name == `SequelizeValidationError`) {
+
+                err = err.errors.map(error => error.message).join(', ')
+
+                // console.log(err)
 
                 next({
                     name: `SequelizeValidationError`,
-                    errors: `Please fill email & password`
+                    errors: err
                 })
-            } else if (err.name === `SequelizeUniqueConstraintError`) {
+            } else if (err.name == `SequelizeUniqueConstraintError`) {
 
                 next({
                     name: `SequelizeUniqueConstraintError`,
@@ -136,10 +141,12 @@ class Controller {
 
     static async cat(req, res, next) {
 
+        console.log('tes')
+
         try {
             let cat = await axios({
                 method: `GET`,
-                url: `https://api.thecatapi.com/v1/images/search?api_key=c9fb96c2-58df-4c88-8558-a369c7911aaa`,
+                url: `https://api.thecatapi.com/v1/images/search?api_key=${process.env.thecatapi_key}`,
             })
 
             // console.log(cat.data)
