@@ -11,8 +11,10 @@ class Controller {
         // console.log(req.body)
 
         try {
+
             const newUser = await User.create(req.body)
             res.status(201).json(newUser)
+
         } catch (err) {
 
             // console.log(err);
