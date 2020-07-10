@@ -10,21 +10,21 @@ class Controller {
         // console.log(req.body)
 
         try {
+
             const newUser = await User.create(req.body)
             res.status(201).json(newUser)
+
         } catch (err) {
 
             console.log(err);
 
-            if (err.name = `SequelizeValidationError`) {
-
-
+            if (err.name === `SequelizeValidationError`) {
 
                 next({
                     name: `SequelizeValidationError`,
                     errors: `Please fill email & password`
                 })
-            } else if (err.name = `SequelizeUniqueConstraintError`) {
+            } else if (err.name === `SequelizeUniqueConstraintError`) {
 
                 next({
                     name: `SequelizeUniqueConstraintError`,
